@@ -1,0 +1,17 @@
+{
+  "name": "comics_reader",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "zonagilreath",
+  "license": "ISC",
+  "dependencies": {
+    "connect": "^3.7.0",
+    "pg": "^7.12.0",
+    "pg-large-object": "^2.0.0",
+    "pg-promise": "^9.0.0"
+  }
+}
