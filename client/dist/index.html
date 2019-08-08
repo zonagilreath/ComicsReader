@@ -6,36 +6,38 @@
 </head>
 <body>
     <form method="post" enctype="multipart/form-data" action="/upload">
-    <input type="file" name="file" multiple>
-    <input type="file"/>
-    <input type="text" name="title" placeholder="title"/>
-    <input type="text" name="year" placeholder="year"/>
-    <input type="text" name="issue_number" placeholder="issue_number"/>
-    <input type="submit" value="Submit">
-    <img src="/16452.jpg"/>
-    <img src="/16453.jpg"/>
-    <img src="/16454.jpg"/>
-    <img src="/16455.jpg"/>
-    <img src="/16456.jpg"/>
-    <img src="/16457.jpg"/>
-    <img src="/16458.jpg"/>
-    <img src="/16459.jpg"/>
-    <img src="/16460.jpg"/>
-    <img src="/16461.jpg"/>
-    <img src="/16462.jpg"/>
-    <img src="/16463.jpg"/>
-    <img src="/16464.jpg"/>
-    <img src="/16465.jpg"/>
-    <img src="/16466.jpg"/>
-    <img src="/16467.jpg"/>
-    <img src="/16468.jpg"/>
-    <img src="/16469.jpg"/>
-    <img src="/16470.jpg"/>
-    <img src="/16471.jpg"/>
-    <img src="/16472.jpg"/>
-    <img src="/16473.jpg"/>
-    <img src="/16474.jpg"/>
-    <img src="/16475.jpg"/>
-</form>
+        <input type="file" name="file" multiple>
+        <input type="file"/>
+        <input type="text" name="title" placeholder="title"/>
+        <input type="text" name="year" placeholder="year"/>
+        <input type="text" name="issue_number" placeholder="issue_number"/>
+        <input type="submit" value="Submit">
+    </form>
+    <form id="get_issue">
+        <input id="issue_id" name="issue_id" type="text" placeholder="issue_id">
+        <input type="submit" value="submit">
+    </form>
+    <div id="viewDiv">
+    </div>
+    <script>
+        async function getIssue(e) {
+            e.preventDefault();
+            const issue_id = document.getElementById("issue_id").value;
+            const oids = await fetch('/issues/' + issue_id)
+            .then(data => data.json())
+            .then(data => {
+                console.log(data);
+                const viewDiv = document.getElementById('viewDiv');
+                data.map(oidObj => {
+                    console.log(oidObj);
+                    const img = document.createElement("img")
+                    img.src = `/content/${oidObj.pageoid}.jpg`
+                    viewDiv.appendChild(img)
+                })
+            })
+        }
+        const form = document.getElementById("get_issue");
+        form.addEventListener("submit", getIssue);
+    </script>
 </body>
 </html>

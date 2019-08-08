@@ -22,21 +22,49 @@ app.use(function (req, res) {
   }
 
   else if (req.method === 'GET'){
-    const reqpath = req.url.toString().split('?')[0];
+    const [reqpath, queryString] = req.url.toString().split('?');
+    console.log(reqpath);
+    console.log(queryString);
     if (reqpath === '/') {
-      const file = path.join(distDir, '/index.html');
-      const static = fs.createReadStream(file);
-      static.on('open', function () {
-        res.setHeader('Content-Type', 'text/html');
-        static.pipe(res);
-      });
-      static.on('error', function () {
-        res.setHeader('Content-Type', 'text/plain');
-        res.statusCode = 404;
-        res.end('Not found');
-      });
-    }else{
-      const [_, oid, ext] = reqpath.split(/[\s.\/]+/)
+      if (queryString){
+        const queryObj = queryString.split('&')
+                        .reduce((acc, query) => {
+                          const [q, v] = query.split('=');
+                          acc[q] = v;
+                          return acc
+                        }, {});
+        console.log('queries obj', queryObj);
+        db.search(queryObj)
+        .then(results => {
+          console.log(results);
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify(results));
+        })
+      }else {
+        const file = path.join(distDir, '/index.html');
+        const static = fs.createReadStream(file);
+        static.on('open', function () {
+          res.setHeader('Content-Type', 'text/html');
+          static.pipe(res);
+        });
+        static.on('error', function () {
+          res.setHeader('Content-Type', 'text/plain');
+          res.statusCode = 404;
+          res.end('Not found');
+        });
+      }
+    }else if (reqpath.split('/')[1] === 'issues'){
+      const [_, __, issue_id] = reqpath.split(/[\s.\/]+/);
+      db.getPages(issue_id)
+      .then(results => {
+        console.log(results);
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify(results));
+      })
+
+    }else if (reqpath.split('/')[1] === 'content'){
+      const [_, __, oid, ext] = reqpath.split(/[\s.\/]+/);
+      console.log('from content route', _, __, oid, ext);
       const type = mime[ext] || 'text/plain';
       res.setHeader('Content-Type', type);
       db.getImage(res, oid)
@@ -50,29 +78,3 @@ app.use(function (req, res) {
 app.listen(8080, function () {
     console.log('Listening on localhost:8080/');
 });
-
-
-// if (file.indexOf(dir + path.sep) !== 0) {
-//   res.statusCode = 403;
-//   res.setHeader('Content-Type', 'text/plain');
-//   return res.end('Forbidden');
-// }
-// const type = mime[path.extname(file).slice(1)] || 'text/plain';
-
-  // if (req.method !== 'GET') {
-  //   res.statusCode = 501;
-  //   res.setHeader('Content-Type', 'text/plain');
-  //   return res.end('Method not implemented');
-  // }
-    // console.log('got a post request');
-    // const busboy = new Busboy({ headers: req.headers });
-    // busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
-    //   file.pipe(db.postImage)
-    //   file.on('end', function() {
-    //     console.log('File [' + fieldname + '] Finished');
-    //   });
-    // });
-    // busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated, encoding, mimetype) {
-    //   console.log('Field [' + fieldname + ']: value: ' + inspect(val));
-    // });
-    // req.pipe(busboy)

@@ -36,7 +36,6 @@ module.exports.createIssuePageLinks = (issue_id, pageOIDs)=>{
 }
 
 module.exports.postImage = (file) => {
-
   return db.tx(tx => {
     const man = new LargeObjectManager({pgPromise: tx});
     const bufferSize = 16384;
@@ -56,7 +55,13 @@ module.exports.postImage = (file) => {
   })
 }
 
-// test oid = 16399
+module.exports.getPages = (issue_id) => {
+  return db.query('SELECT pageoid from issue_pages WHERE issue_id = $1 ORDER BY pageoid ASC;', issue_id)
+  // .then(data => {
+  //   console.log('got data: ', data);
+  //   return data;
+  // })
+}
 
 module.exports.getImage = (res, oid) => {
   return db.tx(tx => {
@@ -73,4 +78,23 @@ module.exports.getImage = (res, oid) => {
       });
     })
   })
+}
+
+module.exports.search = (queryObj) => {
+  const acceptable = ['title', 'issue_number', 'year'];
+  let queryString = 'SELECT * FROM issues WHERE ';
+  let queryParams = [];
+  let paramsCount = 0;
+  for (let query in queryObj){
+    if (!acceptable.includes(query)){
+      continue;
+    }
+    const comparator = (query === 'title') ? ' ilike ' : '= '
+    queryString += query + comparator + '$' + ++paramsCount + ' AND ';
+    queryParams.push(decodeURIComponent(queryObj[query]).toLowerCase());
+  }
+  if (paramsCount) queryString =queryString.replace(/\sAND\s$/, ';');
+  else queryString = queryString.replace(/\sWHERE\s$/, ';');
+  console.log(queryString, paramsCount);
+  return db.query(queryString, queryParams);
 }
