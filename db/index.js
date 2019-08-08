@@ -56,6 +56,14 @@ module.exports = {};
  // .catch(error => {
  //  console.log('Something went horribly wrong!', error);
  // });
+ // 
+module.exports.postIssue = (name)=>{
+  return db.query('INSERT INTO issues (name) values ($1) RETURNING id;', [name])
+}
+
+module.exports.createIssuePageLink = (issueID, pageOID)=>{
+
+}
 
 module.exports.postImage = (file) => {
 

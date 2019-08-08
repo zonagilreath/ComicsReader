@@ -20,38 +20,27 @@ const mime = {
 app.use(function (req, res) {
 
   if (req.method === 'POST'){
-    // const busboy = new Busboy({ headers: req.headers });
-    // busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
-    //   console.log('File [' + fieldname + ']: filename: ' + filename + ', encoding: ' + encoding + ', mimetype: ' + mimetype);
-    //   db.postImage(file)
-    //   .then(oid => console.log('the oid was,', oid))
-    // });
-    // busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated, encoding, mimetype) {
-    //   console.log('Field [' + fieldname + ']: value: ' + inspect(val));
-    // });
-    // busboy.on('finish', function() {
-    //   console.log('Done parsing form!');
-    //   res.writeHead(303, { Connection: 'close', Location: '/' });
-    //   res.end();
-    // });
-    // req.pipe(busboy);
-    console.log('got a post');
-    busboyPromise(req)
-      .then(function (parts) {
-        console.log('busboyPromise triggered');
-        for (var name in parts.fields) {
-          var field = parts.fields[name];
-          console.log('field name:', field.value, 'value:', field.value);
-        }
-
-        for (var name in parts.files) {
-          var file = parts.files[name];
-          console.log('file field name:', file.value);
-        }
+    const busboy = new Busboy({ headers: req.headers });
+    busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
+      console.log('File [' + fieldname + ']: filename: ' + filename + ', encoding: ' + encoding + ', mimetype: ' + mimetype);
+      return db.postImage(file)
+      .then(oid => {
+        console.log('the oid was,', oid);
+        return oid
       })
-      .catch(function (err) {
-        console.error('error:', err);
-      });
+    });
+    busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated, encoding, mimetype) {
+      console.log('Field [' + fieldname + ']: value: ' + val);
+      db.postIssue(val)
+      .then(result => console.log('result:', result))
+      .catch(err => console.error(err))
+    });
+    busboy.on('finish', function() {
+      console.log('Done parsing form!');
+      res.writeHead(303, { Connection: 'close', Location: '/' });
+      res.end();
+    });
+    req.pipe(busboy)
   }
 
   else if (req.method === 'GET'){
