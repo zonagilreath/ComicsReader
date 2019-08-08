@@ -18,51 +18,21 @@ const dbURL = `postgresql://${process.env.PGUSER}:${process.env.PGPASSWORD}@${pr
 
 module.exports = {};
 
- // db.connect()
- // .then(obj => {
- //   console.log('connected to psql on port', process.env.PGPORT)
- //   obj.done(); // success, release the connection;
- // })
- // .catch(error => {
- //   console.log('ERROR:', error.message || error);
- // });
- 
- // db.tx(tx => {
- //  const man = new LargeObjectManager({pgPromise: tx});
- // 
- //  // If you are on a high latency connection and working with
- //  // large LargeObjects, you should increase the buffer size.
- //  // The buffer should be divisible by 2048 for best performance
- //  // (2048 is the default page size in PostgreSQL, see LOBLKSIZE)
- //  const bufferSize = 16384;
- // 
- //  return man.createAndWritableStreamAsync(bufferSize)
- //  .then(([oid, stream]) => {
- //    // The server has generated an oid
- //    console.log('Creating a large object with the oid', oid);
- // 
- //    const fileStream = createReadStream(path.resolve(__dirname, '../Star Wars 070 (2019)', 'Star Wars 070-000.jpg'));
- //    fileStream.pipe(stream);
- // 
- //    return new Promise((resolve, reject) => {
- //      stream.on('finish', resolve);
- //      stream.on('error', reject);
- //    });
- //  });
- // })
- // .then(() => {
- //  console.log('Done!');
- // })
- // .catch(error => {
- //  console.log('Something went horribly wrong!', error);
- // });
- // 
-module.exports.postIssue = (name)=>{
-  return db.query('INSERT INTO issues (name) values ($1) RETURNING id;', [name])
+module.exports.postIssue = (title, year, issue_number)=>{
+  return db.query('INSERT INTO issues (title, year, issue_number) values ($1, $2, $3) RETURNING id;', [title, year, issue_number]);
 }
 
-module.exports.createIssuePageLink = (issueID, pageOID)=>{
-
+module.exports.createIssuePageLinks = (issue_id, pageOIDs)=>{
+  return db.tx(t => {
+    const queries = pageOIDs.map(oid => {
+        return t.none('INSERT INTO issue_pages (issue_id, pageoid) VALUES($1, $2)', [issue_id, oid]);
+    });
+    return t.batch(queries);
+  })
+  .then(data => {
+    console.log(data);
+    return data
+  })
 }
 
 module.exports.postImage = (file) => {
@@ -75,10 +45,6 @@ module.exports.postImage = (file) => {
     .then(([oid, stream]) => {
       console.log('Creating a lob with oid:', oid);
       file.pipe(stream)
-      // file.on('data', (data)=>{
-      //   console.log('got some data boss!', data);
-      //   data.pipe(stream)
-      // })
 
       return new Promise((resolve, reject) => {
         stream.on('finish', ()=>{
