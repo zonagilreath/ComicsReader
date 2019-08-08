@@ -59,7 +59,7 @@ module.exports = {};
 
 module.exports.postImage = (file) => {
 
-  db.tx(tx => {
+  return db.tx(tx => {
     const man = new LargeObjectManager({pgPromise: tx});
     const bufferSize = 16384;
 
@@ -73,7 +73,9 @@ module.exports.postImage = (file) => {
       // })
 
       return new Promise((resolve, reject) => {
-        stream.on('finish', resolve);
+        stream.on('finish', ()=>{
+          resolve(oid)
+        });
         stream.on('error', reject);
       });
     });

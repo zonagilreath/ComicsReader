@@ -6,6 +6,7 @@ const db = require('../db/index.js');
 const Busboy = require('busboy');
 const multer = require('multer');
 const multiparty = require('multiparty');
+const busboyPromise = require('busboy-promise');
 
 const dir = path.join(__dirname, 'public');
 
@@ -19,31 +20,40 @@ const mime = {
 app.use(function (req, res) {
 
   if (req.method === 'POST'){
-    // const form = new multiparty.Form();
-    // form.on('error', function(err) {
-    //   console.log('Error parsing form: ' + err.stack);
+    // const busboy = new Busboy({ headers: req.headers });
+    // busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
+    //   console.log('File [' + fieldname + ']: filename: ' + filename + ', encoding: ' + encoding + ', mimetype: ' + mimetype);
+    //   db.postImage(file)
+    //   .then(oid => console.log('the oid was,', oid))
     // });
-    // form.on('part', function(part) {
-    //   if (!part.filename) {
-    //     console.log('got field named ' + part.name);
-    //     part.resume();
-    //   }
-    //  
-    //   if (part.filename) {
-    //     console.log('got file named ' + part.name);
-    //     db.postImage(part);
-    //   }
-    //   part.on('error', function(err) {
-    //     console.error(err)
-    //   });
+    // busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated, encoding, mimetype) {
+    //   console.log('Field [' + fieldname + ']: value: ' + inspect(val));
     // });
-    // form.on('close', function() {
-    //   console.log('Upload completed!');
-    //   res.setHeader('Content-Type', 'text/plain');
-    //   res.end('Received ' + count + ' files');
+    // busboy.on('finish', function() {
+    //   console.log('Done parsing form!');
+    //   res.writeHead(303, { Connection: 'close', Location: '/' });
+    //   res.end();
     // });
-    // form.parse(req);
+    // req.pipe(busboy);
+    console.log('got a post');
+    busboyPromise(req)
+      .then(function (parts) {
+        console.log('busboyPromise triggered');
+        for (var name in parts.fields) {
+          var field = parts.fields[name];
+          console.log('field name:', field.value, 'value:', field.value);
+        }
+
+        for (var name in parts.files) {
+          var file = parts.files[name];
+          console.log('file field name:', file.value);
+        }
+      })
+      .catch(function (err) {
+        console.error('error:', err);
+      });
   }
+
   else if (req.method === 'GET'){
     const reqpath = req.url.toString().split('?')[0];
     console.log(reqpath);
