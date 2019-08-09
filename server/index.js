@@ -53,6 +53,18 @@ app.use(function (req, res) {
           res.end('Not found');
         });
       }
+    }else if (reqpath.split('/')[1] === 'bundle'){
+      const file = path.join(distDir, '/comics_reader_bundle.js');
+      const bundle = fs.createReadStream(file);
+      bundle.on('open', function () {
+        res.setHeader('Content-Type', 'text/javascript');
+        bundle.pipe(res);
+      });
+      bundle.on('error', function () {
+        res.setHeader('Content-Type', 'text/plain');
+        res.statusCode = 404;
+        res.end('Not found');
+      });
     }else if (reqpath.split('/')[1] === 'issues'){
       const [_, __, issue_id] = reqpath.split(/[\s.\/]+/);
       db.getPages(issue_id)
