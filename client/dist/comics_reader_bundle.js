@@ -153,11 +153,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+ // <Form onSubmit={props.submitPost}>
 
 function PostForm(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_1___default.a, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_3___default.a, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_4___default.a, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_1___default.a.Group, {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    action: "/",
+    method: "post"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_3___default.a, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_4___default.a, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_1___default.a.Group, {
     controlId: "formGroupTitle"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_1___default.a.Label, null, "Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_1___default.a.Control, {
+    name: "title",
     type: "text",
     placeholder: "Series title"
   }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_4___default.a, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_1___default.a.Group, {
@@ -181,6 +186,7 @@ function PostForm(props) {
   })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_3___default.a, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_4___default.a, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_1___default.a.Group, {
     controlId: "pages"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_1___default.a.Label, null, "Upload your comic"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_1___default.a.Control, {
+    name: "files",
     type: "file",
     multiple: true
   }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_4___default.a, null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_4___default.a, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2___default.a, {
@@ -446,11 +452,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_Page_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Page.jsx */ "./client/src/components/Page.jsx");
-/* harmony import */ var _components_ViewList_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/ViewList.jsx */ "./client/src/components/ViewList.jsx");
-/* harmony import */ var _components_PostForm_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/PostForm.jsx */ "./client/src/components/PostForm.jsx");
-/* harmony import */ var _components_SearchForm_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/SearchForm.jsx */ "./client/src/components/SearchForm.jsx");
-/* harmony import */ var _components_SearchResults_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/SearchResults.jsx */ "./client/src/components/SearchResults.jsx");
+/* harmony import */ var _components_ViewList_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/ViewList.jsx */ "./client/src/components/ViewList.jsx");
+/* harmony import */ var _components_PostForm_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/PostForm.jsx */ "./client/src/components/PostForm.jsx");
+/* harmony import */ var _components_SearchForm_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/SearchForm.jsx */ "./client/src/components/SearchForm.jsx");
+/* harmony import */ var _components_SearchResults_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/SearchResults.jsx */ "./client/src/components/SearchResults.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -468,7 +473,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 
 
 
@@ -498,11 +502,11 @@ function (_React$Component) {
     _this.state = {
       activeComic: null,
       oids: [],
-      searchResults: []
+      searchResults: [],
+      userMakingPost: false
     };
     _this.receiveSearchResults = _this.receiveSearchResults.bind(_assertThisInitialized(_this));
     _this.selectComic = _this.selectComic.bind(_assertThisInitialized(_this));
-    _this.submitPost = _this.submitPost.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -517,9 +521,6 @@ function (_React$Component) {
         return console.log(_this2.state);
       });
     }
-  }, {
-    key: "submitPost",
-    value: function submitPost() {}
   }, {
     key: "selectComic",
     value: function selectComic(issue_id) {
@@ -543,12 +544,14 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, this.state.searchResults.length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SearchResults_jsx__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, this.state.searchResults.length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SearchResults_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
         results: this.state.searchResults,
         selectComic: this.selectComic
-      }) : null, this.state.activeComic ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_ViewList_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }) : null, this.state.activeComic ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_ViewList_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
         oids: this.state.oids
-      }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PostForm_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SearchForm_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      }) : null, this.state.userMakingPost ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PostForm_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        submitPost: this.submitPost
+      }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SearchForm_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
         receiveSearchResults: this.receiveSearchResults
       }));
     }

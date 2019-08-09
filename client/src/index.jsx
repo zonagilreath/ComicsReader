@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Page from './components/Page.jsx';
 import PageViewList from './components/ViewList.jsx';
 import PostForm from './components/PostForm.jsx';
 import SearchForm from './components/SearchForm.jsx';
@@ -22,10 +21,10 @@ class App extends React.Component{
       activeComic: null,
       oids: [],
       searchResults: [],
+      userMakingPost: false
     }
     this.receiveSearchResults = this.receiveSearchResults.bind(this);
     this.selectComic = this.selectComic.bind(this);
-    this.submitPost = this.submitPost.bind(this);
   }
 
   receiveSearchResults(data){
@@ -33,8 +32,6 @@ class App extends React.Component{
       searchResults: data
     }, ()=> console.log(this.state))
   }
-
-  submitPost(){}
 
   selectComic(issue_id){
     console.log(issue_id);
@@ -58,7 +55,9 @@ class App extends React.Component{
       {this.state.activeComic ? (
         <PageViewList oids={this.state.oids} />
       ) : (null)}
-      <PostForm />
+      {this.state.userMakingPost ? (
+        <PostForm submitPost={this.submitPost} />
+      ) : (null)}
       <SearchForm receiveSearchResults={this.receiveSearchResults} />
       </React.Fragment>
     )

@@ -4,14 +4,15 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
+    // <Form onSubmit={props.submitPost}>
 export default function PostForm(props){
   return (
-    <Form>
+    <form action='/' method='post'>
       <Row>
         <Col>
           <Form.Group controlId="formGroupTitle">
             <Form.Label>Title</Form.Label>
-            <Form.Control type="text" placeholder="Series title" />
+            <Form.Control name="title" type="text" placeholder="Series title" />
           </Form.Group>
         </Col>
         <Col>
@@ -45,7 +46,7 @@ export default function PostForm(props){
         <Col>
           <Form.Group controlId="pages">
             <Form.Label>Upload your comic</Form.Label>
-            <Form.Control type="file" multiple/>
+            <Form.Control name="files" type="file" multiple/>
           </Form.Group>
         </Col>
         <Col></Col>
@@ -55,6 +56,6 @@ export default function PostForm(props){
           </Button>
         </Col>
       </Row>
-    </Form>
+    </form>
   )
 }
