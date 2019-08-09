@@ -26,7 +26,7 @@ app.use(function (req, res) {
     console.log(reqpath);
     console.log(queryString);
     if (reqpath === '/') {
-      if (queryString){
+      if (queryString || queryString === ''){
         const queryObj = queryString.split('&')
                         .reduce((acc, query) => {
                           const [q, v] = query.split('=');

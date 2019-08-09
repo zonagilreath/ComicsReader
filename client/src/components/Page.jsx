@@ -12,8 +12,7 @@ import {
 
 
 const divStyle = {
-  width: '35%',
-  display: 'inline-block'
+  width: '35%'
 }
 const containerStyle = {
   overflow: 'visible'

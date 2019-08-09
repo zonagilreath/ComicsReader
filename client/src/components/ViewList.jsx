@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import LazyLoad from 'react-lazyload';
 import Page from './Page.jsx'
 
-export default function ViewList(props){
+export default function PageViewList(props){
   return (
     <div>
       {props.oids.map((oid, idx) =>(

@@ -56,11 +56,7 @@ module.exports.postImage = (file) => {
 }
 
 module.exports.getPages = (issue_id) => {
-  return db.query('SELECT pageoid from issue_pages WHERE issue_id = $1 ORDER BY pageoid ASC;', issue_id)
-  // .then(data => {
-  //   console.log('got data: ', data);
-  //   return data;
-  // })
+  return db.query('SELECT pageoid from issue_pages WHERE issue_id = $1 ORDER BY pageoid ASC;', issue_id);
 }
 
 module.exports.getImage = (res, oid) => {
