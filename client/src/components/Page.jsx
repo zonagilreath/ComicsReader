@@ -8,28 +8,31 @@ import {
   TOUCH_ACTIVATION
 } from "react-image-magnifiers";
 
+ 
+
+
 const divStyle = {
-  width: '40%',
+  width: '35%',
   display: 'inline-block'
+}
+const containerStyle = {
+  overflow: 'visible'
 }
 
 export default function Page(props){
+  console.log('Page was called');
   return (
     <div style={divStyle}>
       <GlassMagnifier
+        style={{overflow: 'visible'}}
         magnifierBorderSize={1}
-        magnifierSize='100%'
+        className='overflow'
+        allowOverFlow={true}
+        magnifierSize='120%'
         magnifierBackgroundColor='rgba(10,10,10,.5)'
         square={true}
-        imageSrc={'/content/' + props.poid + '.jpg'}
+        imageSrc={'/content/' + props.oid + '.jpg'}
         imageAlt="Example"
-      />
- 
-      <Magnifier
-        imageSrc={'/content/' + props.poid + '.jpg'}
-        imageAlt="Example"
-        mouseActivation={MOUSE_ACTIVATION.CLICK} // Optional
-        touchActivation={TOUCH_ACTIVATION.LONG_TOUCH} // Optional
       />
     </div>
   )
