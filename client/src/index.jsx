@@ -4,15 +4,6 @@ import PageViewList from './components/ViewList.jsx';
 import PostForm from './components/PostForm.jsx';
 import SearchForm from './components/SearchForm.jsx';
 import SearchResults from './components/SearchResults.jsx';
-// const json = '[{"pageoid":16549},{"pageoid":16550},{"pageoid":16551},{"pageoid":16552},{"pageoid":16553},{"pageoid":16554},{"pageoid":16555},{"pageoid":16556},{"pageoid":16557},{"pageoid":16558},{"pageoid":16559},{"pageoid":16560},{"pageoid":16561},{"pageoid":16562},{"pageoid":16563},{"pageoid":16564},{"pageoid":16565},{"pageoid":16566},{"pageoid":16567},{"pageoid":16568},{"pageoid":16569},{"pageoid":16570},{"pageoid":16571},{"pageoid":16572}]'
-
-// const oids = JSON.parse(json).map(oidObj => oidObj.pageoid)
-
-const divStyle = {
-  width: '100%',
-  textAlign: 'center',
-  paddingTop: '80px'
-}
 
 class App extends React.Component{
   constructor(props){
@@ -25,6 +16,7 @@ class App extends React.Component{
     }
     this.receiveSearchResults = this.receiveSearchResults.bind(this);
     this.selectComic = this.selectComic.bind(this);
+    this.addComicButton = this.addComicButton.bind(this);
   }
 
   receiveSearchResults(data){
@@ -43,6 +35,11 @@ class App extends React.Component{
     })
   }
 
+  addComicButton(){
+    console.log('button clicked');
+    this.setState({userMakingPost: true})
+  }
+
   render(){
     return(
       <React.Fragment>
@@ -56,9 +53,15 @@ class App extends React.Component{
         <PageViewList oids={this.state.oids} />
       ) : (null)}
       {this.state.userMakingPost ? (
-        <PostForm submitPost={this.submitPost} />
-      ) : (null)}
-      <SearchForm receiveSearchResults={this.receiveSearchResults} />
+        <PostForm
+          submitPost={this.submitPost}
+        />
+      ) : (
+        <SearchForm
+          addComicButton={this.addComicButton}
+          receiveSearchResults={this.receiveSearchResults}
+          />
+      )}
       </React.Fragment>
     )
   }

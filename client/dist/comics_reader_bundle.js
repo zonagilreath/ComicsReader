@@ -102,17 +102,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_image_magnifiers__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_image_magnifiers__WEBPACK_IMPORTED_MODULE_1__);
 
 
-var divStyle = {
-  width: '35%'
-};
-var containerStyle = {
-  overflow: 'visible'
-};
 function Page(props) {
-  console.log('Page was called');
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    style: divStyle
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_image_magnifiers__WEBPACK_IMPORTED_MODULE_1__["GlassMagnifier"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_image_magnifiers__WEBPACK_IMPORTED_MODULE_1__["GlassMagnifier"], {
     style: {
       overflow: 'visible'
     },
@@ -124,7 +115,7 @@ function Page(props) {
     square: true,
     imageSrc: '/content/' + props.oid + '.jpg',
     imageAlt: "Example"
-  }));
+  });
 }
 
 /***/ }),
@@ -189,8 +180,12 @@ function PostForm(props) {
     name: "files",
     type: "file",
     multiple: true
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_4___default.a, null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_4___default.a, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    variant: "primary",
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_4___default.a, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    variant: "secondary",
+    type: "button",
+    onClick: this.props.backToSearch
+  }, "Back to search")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_4___default.a, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    variant: "secondary",
     type: "submit"
   }, "Submit"))));
 }
@@ -330,6 +325,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      console.log(this.props.addComicButton);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_1___default.a, {
         onSubmit: this.submitSearch
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_3___default.a, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_4___default.a, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_1___default.a.Group, {
@@ -359,8 +355,12 @@ function (_React$Component) {
         min: 0,
         max: 2000,
         step: 1
-      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_3___default.a, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_4___default.a, null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_4___default.a, null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_4___default.a, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2___default.a, {
-        variant: "primary",
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_3___default.a, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_4___default.a, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2___default.a, {
+        variant: "secondary",
+        type: "button",
+        onClick: this.props.addComicButton
+      }, "Add a comic")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_4___default.a, null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_4___default.a, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2___default.a, {
+        variant: "secondary",
         type: "submit"
       }, "Submit"))));
     }
@@ -421,17 +421,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_lazyload__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-lazyload */ "./node_modules/react-lazyload/lib/index.js");
 /* harmony import */ var react_lazyload__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_lazyload__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _Page_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Page.jsx */ "./client/src/components/Page.jsx");
+/* harmony import */ var react_bootstrap_Container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Container */ "./node_modules/react-bootstrap/Container.js");
+/* harmony import */ var react_bootstrap_Container__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap_Container__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Page_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Page.jsx */ "./client/src/components/Page.jsx");
+
 
 
 
 function PageViewList(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, props.oids.map(function (oid, idx) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Container__WEBPACK_IMPORTED_MODULE_2___default.a, null, props.oids.map(function (oid, idx) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_lazyload__WEBPACK_IMPORTED_MODULE_1___default.a, {
       key: 'page_' + idx,
       offset: 100,
       once: true
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Page_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Page_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
       oid: oid
     }));
   }));
@@ -479,14 +482,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
- // const json = '[{"pageoid":16549},{"pageoid":16550},{"pageoid":16551},{"pageoid":16552},{"pageoid":16553},{"pageoid":16554},{"pageoid":16555},{"pageoid":16556},{"pageoid":16557},{"pageoid":16558},{"pageoid":16559},{"pageoid":16560},{"pageoid":16561},{"pageoid":16562},{"pageoid":16563},{"pageoid":16564},{"pageoid":16565},{"pageoid":16566},{"pageoid":16567},{"pageoid":16568},{"pageoid":16569},{"pageoid":16570},{"pageoid":16571},{"pageoid":16572}]'
-// const oids = JSON.parse(json).map(oidObj => oidObj.pageoid)
 
-var divStyle = {
-  width: '100%',
-  textAlign: 'center',
-  paddingTop: '80px'
-};
 
 var App =
 /*#__PURE__*/
@@ -507,6 +503,7 @@ function (_React$Component) {
     };
     _this.receiveSearchResults = _this.receiveSearchResults.bind(_assertThisInitialized(_this));
     _this.selectComic = _this.selectComic.bind(_assertThisInitialized(_this));
+    _this.addComicButton = _this.addComicButton.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -542,6 +539,14 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "addComicButton",
+    value: function addComicButton() {
+      console.log('button clicked');
+      this.setState({
+        userMakingPost: true
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, this.state.searchResults.length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SearchResults_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -551,7 +556,8 @@ function (_React$Component) {
         oids: this.state.oids
       }) : null, this.state.userMakingPost ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PostForm_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
         submitPost: this.submitPost
-      }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SearchForm_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SearchForm_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        addComicButton: this.addComicButton,
         receiveSearchResults: this.receiveSearchResults
       }));
     }

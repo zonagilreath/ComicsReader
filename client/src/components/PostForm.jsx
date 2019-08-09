@@ -49,9 +49,16 @@ export default function PostForm(props){
             <Form.Control name="files" type="file" multiple/>
           </Form.Group>
         </Col>
-        <Col></Col>
         <Col>
-          <Button variant="primary" type="submit">
+          <Button
+              variant="secondary"
+              type="button"
+              onClick={this.props.backToSearch}>
+              Back to search
+            </Button>
+        </Col>
+        <Col>
+          <Button variant="secondary" type="submit">
             Submit
           </Button>
         </Col>

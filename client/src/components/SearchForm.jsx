@@ -38,6 +38,7 @@ export default class PostForm extends React.Component{
   }
 
   render() {
+    console.log(this.props.addComicButton);
     return (
       <Form onSubmit={this.submitSearch}>
         <Row>
@@ -77,9 +78,17 @@ export default class PostForm extends React.Component{
           </Col>
         </Row>
         <Row>
-          <Col></Col><Col></Col>
           <Col>
-            <Button variant="primary" type="submit">
+            <Button
+              variant="secondary"
+              type="button"
+              onClick={this.props.addComicButton}>
+              Add a comic
+            </Button>
+          </Col>
+          <Col></Col>
+          <Col>
+            <Button variant="secondary" type="submit">
               Submit
             </Button>
           </Col>
