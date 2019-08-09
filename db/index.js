@@ -78,7 +78,7 @@ module.exports.getImage = (res, oid) => {
 
 module.exports.search = (queryObj) => {
   const acceptable = ['title', 'issue_number', 'year'];
-  let queryString = 'SELECT * FROM issues WHERE ';
+  let queryString = 'select issues.*, (select p.pageoid from issue_pages as p where p.issue_id = issues.id limit 1) as coverimage from issues WHERE ';
   let queryParams = [];
   let paramsCount = 0;
   for (let query in queryObj){

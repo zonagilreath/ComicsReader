@@ -90,7 +90,7 @@ export default class PostForm extends React.Component{
             <Col xs="8" lg="2"></Col>
             <Col xs="8" lg="2">
               <Button variant="secondary" type="submit">
-                Submit
+                Search
               </Button>
             </Col>
           </Row>

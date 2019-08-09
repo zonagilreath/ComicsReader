@@ -12,7 +12,8 @@ class App extends React.Component{
       activeComic: null,
       oids: [],
       searchResults: [],
-      userMakingPost: false
+      userMakingPost: false,
+      searchResultCovers: []
     }
     this.receiveSearchResults = this.receiveSearchResults.bind(this);
     this.selectComic = this.selectComic.bind(this);

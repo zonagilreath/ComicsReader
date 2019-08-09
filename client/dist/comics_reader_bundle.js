@@ -413,7 +413,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_3___default.a, {
         variant: "secondary",
         type: "submit"
-      }, "Submit")))));
+      }, "Search")))));
     }
   }]);
 
@@ -550,7 +550,8 @@ function (_React$Component) {
       activeComic: null,
       oids: [],
       searchResults: [],
-      userMakingPost: false
+      userMakingPost: false,
+      searchResultCovers: []
     };
     _this.receiveSearchResults = _this.receiveSearchResults.bind(_assertThisInitialized(_this));
     _this.selectComic = _this.selectComic.bind(_assertThisInitialized(_this));
