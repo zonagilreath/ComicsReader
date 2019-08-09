@@ -17,6 +17,7 @@ class App extends React.Component{
     this.receiveSearchResults = this.receiveSearchResults.bind(this);
     this.selectComic = this.selectComic.bind(this);
     this.addComicButton = this.addComicButton.bind(this);
+    this.backToSearch = this.backToSearch.bind(this);
   }
 
   receiveSearchResults(data){
@@ -36,8 +37,11 @@ class App extends React.Component{
   }
 
   addComicButton(){
-    console.log('button clicked');
     this.setState({userMakingPost: true})
+  }
+
+  backToSearch(){
+    this.setState({userMakingPost: false})
   }
 
   render(){
@@ -55,6 +59,7 @@ class App extends React.Component{
       {this.state.userMakingPost ? (
         <PostForm
           submitPost={this.submitPost}
+          backToSearch={this.backToSearch}
         />
       ) : (
         <SearchForm

@@ -11,44 +11,11 @@
     />
     <style>
         .overflow {overflow: visible !important;}
+        body {background-color: #111}
     </style>
 </head>
 <body>
     <div id="app"></div>
-<!--     <form method="post" enctype="multipart/form-data" action="/upload">
-        <input type="file" name="file" multiple>
-        <input type="file"/>
-        <input type="text" name="title" placeholder="title"/>
-        <input type="text" name="year" placeholder="year"/>
-        <input type="text" name="issue_number" placeholder="issue_number"/>
-        <input type="submit" value="Submit">
-    </form>
-    <form id="get_issue">
-        <input id="issue_id" name="issue_id" type="text" placeholder="issue_id">
-        <input type="submit" value="submit">
-    </form>
-    <div id="viewDiv">
-    </div>
-    <script>
-        async function getIssue(e) {
-            e.preventDefault();
-            const issue_id = document.getElementById("issue_id").value;
-            const oids = await fetch('/issues/' + issue_id)
-            .then(data => data.json())
-            .then(data => {
-                console.log(data);
-                const viewDiv = document.getElementById('viewDiv');
-                data.map(oidObj => {
-                    console.log(oidObj);
-                    const img = document.createElement("img")
-                    img.src = `/content/${oidObj.pageoid}.jpg`
-                    viewDiv.appendChild(img)
-                })
-            })
-        }
-        const form = document.getElementById("get_issue");
-        form.addEventListener("submit", getIssue);
-    </script> -->
     <script type="text/javascript" src="/bundle"></script>
 </body>
 </html>
