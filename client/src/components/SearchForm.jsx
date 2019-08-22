@@ -45,7 +45,7 @@ export default class PostForm extends React.Component{
       <Container style={{maxWidth: '650px'}}>
         <Image src="https://cdn.pastemagazine.com/www/articles/2016/06/22/FlexMentallo_Main.jpg" fluid />
         <Jumbotron variant='dark'>
-          <h1>Muscle Mystery Comics!</h1>
+          <h1>ComicsReader</h1>
           <Form onSubmit={this.submitSearch}>
             <Row>
               <Col xs="8" lg="4">

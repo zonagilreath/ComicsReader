@@ -385,7 +385,7 @@ function (_React$Component) {
         fluid: true
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Jumbotron__WEBPACK_IMPORTED_MODULE_7___default.a, {
         variant: "dark"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Muscle Mystery Comics!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_2___default.a, {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Folks, I'm very tired!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_2___default.a, {
         onSubmit: this.submitSearch
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_4___default.a, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_5___default.a, {
         xs: "8",
@@ -472,7 +472,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function SearchResults(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Container__WEBPACK_IMPORTED_MODULE_1___default.a, null, props.results.map(function (issue, idx) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Container__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    style: {
+      maxWidth: '650px'
+    }
+  }, props.results.map(function (issue, idx) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_2___default.a, {
       key: 'result_' + idx
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ResultCard_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -634,10 +638,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, this.state.searchResults.length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SearchResults_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        results: this.state.searchResults,
-        selectComic: this.selectComic
-      }) : null, this.state.activeComic ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_ViewList_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, this.state.activeComic ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_ViewList_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
         oids: this.state.oids
       }) : null, this.state.userMakingPost ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PostForm_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
         submitPost: this.submitPost,
@@ -645,7 +646,10 @@ function (_React$Component) {
       }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SearchForm_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
         addComicButton: this.addComicButton,
         receiveSearchResults: this.receiveSearchResults
-      }));
+      }), this.state.searchResults.length && !this.state.userMakingPost ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_SearchResults_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        results: this.state.searchResults,
+        selectComic: this.selectComic
+      }) : null);
     }
   }]);
 

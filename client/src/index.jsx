@@ -48,12 +48,6 @@ class App extends React.Component{
   render(){
     return(
       <React.Fragment>
-      {this.state.searchResults.length ? (
-        <SearchResults
-          results={this.state.searchResults}
-          selectComic={this.selectComic}
-        />
-      ) : (null)}
       {this.state.activeComic ? (
         <PageViewList oids={this.state.oids} />
       ) : (null)}
@@ -68,6 +62,12 @@ class App extends React.Component{
           receiveSearchResults={this.receiveSearchResults}
           />
       )}
+      {(this.state.searchResults.length && !this.state.userMakingPost)? (
+        <SearchResults
+          results={this.state.searchResults}
+          selectComic={this.selectComic}
+        />
+      ) : (null)}
       </React.Fragment>
     )
   }
