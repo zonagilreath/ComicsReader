@@ -4,7 +4,7 @@ const pgp = require('pg-promise');
       {createReadStream, createWriteStream} = require('fs');
 
 
-const dbURL = `postgresql://${process.env.PGUSER}:${process.env.PGPASSWORD}@${process.env.PGHOST}:${process.env.PGPORT}/imagetest`,
+const dbURL = `postgresql://${process.env.PGUSER}:${process.env.PGPASSWORD}@${process.env.PGHOST}:${process.env.PGPORT}/${process.env.PGDATABASE}`,
       initOptions = {
         // global event notification;
         error(error, e) {
@@ -15,6 +15,10 @@ const dbURL = `postgresql://${process.env.PGUSER}:${process.env.PGPASSWORD}@${pr
         }
       },
       db = pgp(initOptions)(dbURL);
+
+db.connect()
+.then(()=>console.log('connected to db'))
+.catch(err => console.error(err))
 
 module.exports = {};
 
